@@ -1,4 +1,8 @@
-# AWS Lambda Java 17 Custom Runtime
+# AWS Lambda Java 17 Custom Runtime (DEPRECATED)
+
+This project is no longer required, as [AWS Lambda now supports Java 17](https://aws.amazon.com/blogs/compute/java-17-runtime-now-available-on-aws-lambda/). I've left it here because others might find it's approach useful for other experimentation. 
+
+
 An AWS Lambda layer to enable Java 17 support
 
 ## Usage
