@@ -55,9 +55,13 @@ A custom JRE is created to reduce final file size. Lambda has a 250MB unzipped f
 
 ## Known Issues
 
+Obviously, it's early days, and this is a preliminary release. There are a couple of known issues:
+
 1. The layer fails [CDS](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/class-data-sharing.html) (Class Data Sharing) during initialization. This creates some log traffic, and may adversely affect performance.
 2. It is only (lightly) tested
 3. Only x86_64 is supported
+
+I'll be working on these as I have time. PRs welcome!
 
 ### JVM Settings
 
