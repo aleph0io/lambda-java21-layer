@@ -6,16 +6,16 @@ RUN yum -y update \
     zlib-devel glibc-static libcxx libcxx-devel llvm-toolset-7 zlib-static \
     && rm -rf /var/cache/yum
 
-ENV JDK_FOLDERNAME jdk-17
-ENV JDK_FILENAME openjdk-17_linux-x64_bin.tar.gz
-RUN curl -4 -L https://download.java.net/java/GA/jdk17/0d483333a00540d886896bac774ff48b/35/GPL/${JDK_FILENAME} | tar -xvz
-RUN mv $JDK_FOLDERNAME /usr/lib/jdk17
+ENV JDK_FOLDERNAME jdk-21
+ENV JDK_FILENAME openjdk-21_linux-x64_bin.tar.gz
+RUN curl -4 -L https://download.oracle.com/java/21/latest/jdk-21_linux-x64_bin.tar.gz | tar -xvz
+RUN mv $JDK_FOLDERNAME /usr/lib/jdk21
 RUN yum install -y binutils
 RUN rm -rf $JDK_FOLDERNAME
-ENV PATH="/usr/lib/jdk17/bin:$PATH"
-RUN jlink --add-modules "$(java --list-modules | cut -f1 -d'@' | tr '\n' ',')" --compress 0 --no-man-pages --no-header-files --strip-debug --output /opt/jre17-slim
-RUN find /opt/jre17-slim/lib -name *.so -exec strip -p --strip-unneeded {} \;
+ENV PATH="/usr/lib/jdk21/bin:$PATH"
+RUN jlink --add-modules "$(java --list-modules | cut -f1 -d'@' | tr '\n' ',')" --compress 0 --no-man-pages --no-header-files --strip-debug --output /opt/jre21-slim
+RUN find /opt/jre21-slim/lib -name *.so -exec strip -p --strip-unneeded {} \;
 RUN java -Xshare:dump -version
-RUN rm /opt/jre17-slim/lib/classlist
-RUN cp /usr/lib/jdk17/lib/server/classes.jsa /opt/jre17-slim/lib/server/classes.jsa
-RUN cd /opt/ && zip -r jre-17-slim.zip jre17-slim
+RUN rm /opt/jre21-slim/lib/classlist
+RUN cp /usr/lib/jdk21/lib/server/classes.jsa /opt/jre21-slim/lib/server/classes.jsa
+RUN cd /opt/ && zip -r jre-21-slim.zip jre21-slim
